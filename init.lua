@@ -8,30 +8,31 @@
 --variant of the Gruber Dark theme for BBEdit by John Gruber. Variant
 --by Alexey Kutepov a.k.a. rexim for Emacs. Adapted for Neovim
 
-local colors = {
-        gruberDarkerFg =        "#e4e4ef",
-        gruberDarkerFg1 =      "#f4f4ff",
-        gruberDarkerFg2 =      "#f5f5f5",
-        gruberDarkerWhite =     "#ffffff",
-        gruberDarkerBlack =     "#000000",
-        gruberDarkerBg1 =      "#101010",
-        gruberDarkerBg =        "#181818",
-        gruberDarkerBg1 =      "#282828",
-        gruberDarkerBg2 =      "#453d41",
-        gruberDarkerBg3 =      "#484848",
-        gruberDarkerBg4 =      "#52494e",
-        gruberDarkerRed1 =     "#c73c3f",
-        gruberDarkerRed =       "#f43841",
-        gruberDarkerRedPlus1 =     "#ff4f58",
-        gruberDarkerGreen =     "#73c936",
-        gruberDarkerYellow =    "#ffdd33",
-        gruberDarkerBrown =     "#cc8c3c",
-        gruberDarkerQuartz =    "#95a99f",
-        gruberDarkerNiagara2 = "#303540",
-        gruberDarkerNiagara1 = "#565f73",
-        gruberDarkerNiagara =   "#96a6c8",
-        gruberDarkerWisteria =  "#9e95c7",
+local g = {}
 
+local colors = {
+	gruberDarkerFg = "#e4e4ef",
+	gruberDarkerFg1 = "#f4f4ff",
+	gruberDarkerFg2 = "#f5f5f5",
+	gruberDarkerWhite = "#ffffff",
+	gruberDarkerBlack = "#000000",
+	gruberDarkerBgBlack1 = "#101010",
+	gruberDarkerBg = "#181818",
+	gruberDarkerBg1 = "#282828",
+	gruberDarkerBg2 = "#453d41",
+	gruberDarkerBg3 = "#484848",
+	gruberDarkerBg4 = "#52494e",
+	gruberDarkerRed1 = "#c73c3f",
+	gruberDarkerRed = "#f43841",
+	gruberDarkerRedPlus1 = "#ff4f58",
+	gruberDarkerGreen = "#73c936",
+	gruberDarkerYellow = "#ffdd33",
+	gruberDarkerBrown = "#cc8c3c",
+	gruberDarkerQuartz = "#95a99f",
+	gruberDarkerNiagara2 = "#303540",
+	gruberDarkerNiagara1 = "#565f73",
+	gruberDarkerNiagara = "#96a6c8",
+	gruberDarkerWisteria = "#9e95c7",
 }
 
 colors.fg = colors.gruberDarkerFg
@@ -46,60 +47,64 @@ colors.cursor = colors.gruberDarkerYellow
 colors.yellow = colors.gruberDarkerYellow
 colors.comment = colors.gruberDarkerBrown
 
+
 local hlgroups = {
-        Comment                            = { fg = colors.comment, bg = colors.bg , bold = true},
+	Comment      = { fg = colors.comment, bg = colors.bg, bold = true },
 
-        Normal                             = { fg = colors.fg, bg = colors.bg },
-	
-	Character = {  fg = colors.yellow},
-	Constant = { fg = colors.yellow },
-	Number = {},
-	Boolean = { fg = colors.yellow },
-	Float = {},
-	Conditional = {},
-	Statement = { fg = colors.yellow},
-	Repeat = {},
-	Label = {},
-	Keyword = {},
-	Exception = {},
-	Include  			   = { fg = colors.gruberDarkerQuartz },
-	Prefoc = {},
-	Define = {  fg = colors.yellow },
-	Macro = {},
-	PreCondit = {},
+	Normal       = { fg = colors.fg, bg = colors.bg },
+
+	Character    = { fg = colors.yellow },
+	Constant     = { fg = colors.yellow },
+	Number       = {},
+	Boolean      = { fg = colors.yellow },
+	Float        = {},
+	Conditional  = {},
+	Statement    = { fg = colors.yellow },
+	Repeat       = {},
+	Label        = {},
+	Keyword      = {},
+	Exception    = {},
+	Include      = { fg = colors.gruberDarkerQuartz },
+	Prefoc       = {},
+	Define       = { fg = colors.yellow },
+	Macro        = {},
+	PreCondit    = {},
 	StorageClass = {},
-	Type 				   = { fg = colors.gruberDarkerQuartz },
-	Struct = { fg = colors.yellow },
-	Typedef = {  fg = colors.yellow},
-	Tag = {},
+	Type         = { fg = colors.gruberDarkerQuartz },
+	Struct       = { fg = colors.yellow },
+	Typedef      = { fg = colors.yellow },
+	Tag          = {},
 
-        Cursor				   = { fg = colors.bg, bg = colors.cursor },
-        MsgArea                            = { fg = colors.fg, bg = colors.bg},
-        StatusLine                         = { fg = colors.fg_1, bg = colors.bg_1 },
-	Directory 			   = { fg = colors.gruberDarkerNiagara, bg = colors.bg , style = "bold" },
-        ErrorMsg                           = { fg = colors.gruberDarkerRedPlus1, bg = colors.bg_1 },
-        MoreMsg                            = { fg = colors.yellow, bg = colors.bg_1 },
-        Search                             = { fg = colors.gruberDarkerWhite, bg = colors.gruberDarkerQuartz },
+	Cursor       = { fg = colors.bg, bg = colors.cursor },
+	MsgArea      = { fg = colors.fg, bg = colors.bg },
+	StatusLine   = { fg = colors.fg_1, bg = colors.bg_1 },
+	Directory    = { fg = colors.gruberDarkerNiagara, bg = colors.bg },
+	ErrorMsg     = { fg = colors.gruberDarkerRedPlus1, bg = colors.bg_1 },
+	MoreMsg      = { fg = colors.yellow, bg = colors.bg_1 },
+	Search       = { fg = colors.gruberDarkerWhite, bg = colors.gruberDarkerQuartz },
 }
 
-if vim.g.color_name ~= "test" then
-	vim.cmd("hi clear")
-end
+function g.schema()
+	if vim.g.color_name ~= "gruberdarker" then
+		vim.cmd("hi clear")
+	end
 
-vim.g.color_name = "gruberdarker"
-vim.o.termguicolors = true
+	vim.g.color_name = "gruberdarker"
+	vim.o.termguicolors = true
 
-for group, colors in pairs(hlgroups) do
-	if not vim.tbl_isempty(colors) then
-		if colors.link then
-			vim.cmd("hi! link" .. group .. " " .. colors.link)
-		else
-			local fg = colors.fg and "guifg=" .. colors.fg .. " " or ""
-			local bg = colors.bg and "guibg=" .. colors.bg .. " " or ""
-			local style = colors.style and "gui=" .. colors.style .. " " or ""
-			local guisp = colors.guisp and "guisp=" .. colors.guisp .. " " or ""
-			vim.cmd("hi " .. group .. " " .. fg .. bg .. style .. guisp)
+	for group, color in pairs(hlgroups) do
+		if not vim.tbl_isempty(color) then
+			if color.link then
+				vim.cmd("hi! link" .. group .. " " .. color.link)
+			else
+				local fg = color.fg and "guifg=" .. color.fg .. " " or ""
+				local bg = color.bg and "guibg=" .. color.bg .. " " or ""
+				local style = color.style and "gui=" .. color.style .. " " or ""
+				local guisp = color.guis and "guisp=" .. color.style .. " " or ""
+				vim.cmd("hi " .. group .. " " .. fg .. bg .. style .. guisp)
+			end
 		end
 	end
 end
 
+return g
